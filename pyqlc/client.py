@@ -11,12 +11,12 @@ from . import (
 #    pledge,
     destroy,
 #    miner,
-    representation
+    representation,
 #    pub_sub,
 #    dpki,
 #    settlement,
 #    permission,
-#    ptmkey,
+    ptmkey
 #    dodsettlement
 )
 
@@ -39,7 +39,7 @@ class Client:
 #        self.DPKI = dpki.DPKI(URI)
 #        self.Settlement = settlement.Settlement(URI)
 #        self.Permissiom = permission.Permission(URI)
-#        self.Ptmkey = ptmkey.Ptmkey(URI)
+        self.Ptmkey = ptmkey.Ptmkey(URI)
 #        self.DoDSettlement = dodsettlement.DoDSettlement(URI)
 
     def post(self, method : str, params : list = None):
