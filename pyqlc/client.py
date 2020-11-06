@@ -6,10 +6,10 @@ from . import (
     contract,
 #    mintage,
     rewards,
-    net
+    net,
 #    pov,
 #    pledge,
-#    destroy,
+    destroy
 #    miner,
 #    representation,
 #    pub_sub,
@@ -32,7 +32,7 @@ class Client:
         self.Net = net.Net(URI)
 #        self.Pov = pov.Pov(URI)
 #        self.Pledge = pledge.Pledge(URI)
-#        self.Destroy = destroy.Destroy(URI)
+        self.Destroy = destroy.Destroy(URI)
 #        self.Miner = miner.Miner(URI)
 #        self.Representation = representation.Representation(URI)
 #        self.Pub_Sub = pub_sub.Pub_Sub(WS)
