@@ -3,10 +3,10 @@ from random import randint
 from . import (
     account,
 #    ledger,
-    contract
+    contract,
 #    mintage,
 #    rewards,
-#    net,
+    net
 #    pov,
 #    pledge,
 #    destroy,
@@ -29,7 +29,7 @@ class Client:
         self.Contract = contract.Contract(URI)
 #        self.Mintage = mintage.Mintage(URI)
 #        self.Rewards = rewards.Rewards(URI)
-#        self.Net = net.Net(URI)
+        self.Net = net.Net(URI)
 #        self.Pov = pov.Pov(URI)
 #        self.Pledge = pledge.Pledge(URI)
 #        self.Destroy = destroy.Destroy(URI)
