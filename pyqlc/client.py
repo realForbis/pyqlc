@@ -9,9 +9,9 @@ from . import (
     net,
 #    pov,
 #    pledge,
-    destroy
+    destroy,
 #    miner,
-#    representation,
+    representation
 #    pub_sub,
 #    dpki,
 #    settlement,
@@ -34,7 +34,7 @@ class Client:
 #        self.Pledge = pledge.Pledge(URI)
         self.Destroy = destroy.Destroy(URI)
 #        self.Miner = miner.Miner(URI)
-#        self.Representation = representation.Representation(URI)
+        self.Representation = representation.Representation(URI)
 #        self.Pub_Sub = pub_sub.Pub_Sub(WS)
 #        self.DPKI = dpki.DPKI(URI)
 #        self.Settlement = settlement.Settlement(URI)
