@@ -10,7 +10,7 @@ from . import (
 #    pov,
 #    pledge,
     destroy,
-#    miner,
+    miner,
     representation,
 #    pub_sub,
 #    dpki,
@@ -33,7 +33,7 @@ class Client:
 #        self.Pov = pov.Pov(URI)
 #        self.Pledge = pledge.Pledge(URI)
         self.Destroy = destroy.Destroy(URI)
-#        self.Miner = miner.Miner(URI)
+        self.Miner = miner.Miner(URI)
         self.Representation = representation.Representation(URI)
 #        self.Pub_Sub = pub_sub.Pub_Sub(WS)
 #        self.DPKI = dpki.DPKI(URI)
