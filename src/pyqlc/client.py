@@ -5,7 +5,7 @@ from . import (
 #    ledger,
     contract,
 #    mintage,
-#    rewards,
+    rewards,
     net
 #    pov,
 #    pledge,
@@ -28,7 +28,7 @@ class Client:
 #        self.Ledger = ledger.Ledger(URI)
         self.Contract = contract.Contract(URI)
 #        self.Mintage = mintage.Mintage(URI)
-#        self.Rewards = rewards.Rewards(URI)
+        self.Rewards = rewards.Rewards(URI)
         self.Net = net.Net(URI)
 #        self.Pov = pov.Pov(URI)
 #        self.Pledge = pledge.Pledge(URI)
