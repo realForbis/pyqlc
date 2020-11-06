@@ -14,7 +14,7 @@ from . import (
     representation,
 #    pub_sub,
 #    dpki,
-#    settlement,
+    settlement,
 #    permission,
     ptmkey
 #    dodsettlement
@@ -37,7 +37,7 @@ class Client:
         self.Representation = representation.Representation(URI)
 #        self.Pub_Sub = pub_sub.Pub_Sub(WS)
 #        self.DPKI = dpki.DPKI(URI)
-#        self.Settlement = settlement.Settlement(URI)
+        self.Settlement = settlement.Settlement(URI)
 #        self.Permissiom = permission.Permission(URI)
         self.Ptmkey = ptmkey.Ptmkey(URI)
 #        self.DoDSettlement = dodsettlement.DoDSettlement(URI)
