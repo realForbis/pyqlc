@@ -124,7 +124,6 @@ class Account:
             checksum = crypto.b32qlc_encode(crypto.address_checksum(public_key))
             return ADDRESSPREFIX + address.decode('ascii') + checksum.decode('ascii')
         else:
-            #print(public_key)
             return client.Client(self.URI).post("account_forPublicKey", [public_key])
         
     def publicKey(self, address : str, local : bool = True) -> bytes:

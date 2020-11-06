@@ -1,9 +1,9 @@
 import requests
 from random import randint
 from . import (
-    account
+    account,
 #    ledger,
-#    contract,
+    contract
 #    mintage,
 #    rewards,
 #    net,
@@ -26,7 +26,7 @@ class Client:
         self.WS = WS
         self.Account = account.Account(URI)
 #        self.Ledger = ledger.Ledger(URI)
-#        self.Contract = contract.Contract(URI)
+        self.Contract = contract.Contract(URI)
 #        self.Mintage = mintage.Mintage(URI)
 #        self.Rewards = rewards.Rewards(URI)
 #        self.Net = net.Net(URI)
