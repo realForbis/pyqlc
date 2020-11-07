@@ -16,7 +16,8 @@ from . import (
     dpki,
     settlement,
     permission,
-    ptmkey
+    ptmkey,
+    kyc
 #    dodsettlement
 )
 
@@ -40,6 +41,7 @@ class Client:
         self.Settlement = settlement.Settlement(URI)
         self.Permissiom = permission.Permission(URI)
         self.Ptmkey = ptmkey.Ptmkey(URI)
+        self.Kyc = kyc.Kyc(URI)
 #        self.DoDSettlement = dodsettlement.DoDSettlement(URI)
 
     def post(self, method : str, params : list = None):
