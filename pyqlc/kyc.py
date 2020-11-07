@@ -1,4 +1,4 @@
-from .util import size_in_bytes
+from .utils.helper import size_in_bytes
 from . import client
 
 STATUSES = [
