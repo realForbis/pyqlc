@@ -13,7 +13,7 @@ from . import (
     miner,
     representation,
 #    pub_sub,
-#    dpki,
+    dpki,
     settlement,
 #    permission,
     ptmkey
@@ -36,7 +36,7 @@ class Client:
         self.Miner = miner.Miner(URI)
         self.Representation = representation.Representation(URI)
 #        self.Pub_Sub = pub_sub.Pub_Sub(WS)
-#        self.DPKI = dpki.DPKI(URI)
+        self.DPKI = dpki.DPKI(URI)
         self.Settlement = settlement.Settlement(URI)
 #        self.Permissiom = permission.Permission(URI)
         self.Ptmkey = ptmkey.Ptmkey(URI)
