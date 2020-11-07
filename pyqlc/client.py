@@ -7,7 +7,7 @@ from . import (
 #    mintage,
     rewards,
     net,
-#    pov,
+    pov,
 #    pledge,
     destroy,
     miner,
@@ -30,7 +30,7 @@ class Client:
 #        self.Mintage = mintage.Mintage(URI)
         self.Rewards = rewards.Rewards(URI)
         self.Net = net.Net(URI)
-#        self.Pov = pov.Pov(URI)
+        self.Pov = pov.Pov(URI)
 #        self.Pledge = pledge.Pledge(URI)
         self.Destroy = destroy.Destroy(URI)
         self.Miner = miner.Miner(URI)
