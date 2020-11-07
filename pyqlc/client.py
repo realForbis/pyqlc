@@ -4,7 +4,7 @@ from . import (
     account,
 #    ledger,
     contract,
-#    mintage,
+    mintage,
     rewards,
     net,
     pov,
@@ -27,7 +27,7 @@ class Client:
         self.Account = account.Account(URI)
 #        self.Ledger = ledger.Ledger(URI)
         self.Contract = contract.Contract(URI)
-#        self.Mintage = mintage.Mintage(URI)
+        self.Mintage = mintage.Mintage(URI)
         self.Rewards = rewards.Rewards(URI)
         self.Net = net.Net(URI)
         self.Pov = pov.Pov(URI)
