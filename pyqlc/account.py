@@ -1,13 +1,12 @@
 import secrets
-from .utils import crypto
-import binascii
 from . import client
-
-ADDRESSPREFIX = "qlc_"
-ADDRESSLEN = 60
-ADDRESSPREFIXLEN = len(ADDRESSPREFIX)
-HEXADDRESSLENGHT = ADDRESSPREFIXLEN + ADDRESSLEN
-PUBLICKEYSIZEINBYTES = 32
+from .utils.crypto import(
+    private_to_public_key,
+    generate_private_key,
+    public_key_to_address,
+    address_to_public_key,
+    validate_qlc_address
+)
 
 class Account:
     def __init__(self, URI):
@@ -19,23 +18,11 @@ class Account:
         
         Parameters
         ----------
-        seed : str
-        index : uint32 
-            index for account, if not set, default value is 0
-        local : bool
-            if local is set to `True`, account will be created localy
-
-        Returns
-        ----------
-        address, privKey, pubKey
-
-        e.g.
-        ----
-        {
-            'address': 'qlc_3wkft3s69t59c7rbjyozam6j5ib7ooug7sogsfg5abwaf1qiprgxpap6suiu', 
-            'privKey': b'54e704e605641da0ffee6898c1e336e88b0437e2399554675e4a6710f68ed6c2f24dd07243e867517098fabf44c911c125ad76e2e6aecb5c342788682f0b61dd',
-            'pubKey': b'f24dd07243e867517098fabf44c911c125ad76e2e6aecb5c342788682f0b61dd'
-        }
+        :param str seed: Seed as a 64-character hex string
+        :param int index: index for account, if not set, default value is 0
+        :param bool local : if local is set to `True`, account will be created localy
+        :return: Account address, privKey and pubKey
+        :rtype: dict
         """
         if seed is None:
             if local:
@@ -44,11 +31,13 @@ class Account:
                 seed = self.newSeed(local = False)
 
         if local:
-            pair = crypto.keypair_from_seed(seed, index=index)
+            priv_key = generate_private_key(seed, index)
+            pub_key = private_to_public_key(priv_key)
+
             account = {
-                'address': self.forPublicKey(public_key = pair['public'], local = True),
-                'privKey': binascii.hexlify(pair['private']+pair['public']),
-                'pubKey': binascii.hexlify(pair['public']),
+                'address': self.forPublicKey(public_key = pub_key, local = True),
+                'privKey': (priv_key+pub_key),
+                'pubKey': (pub_key)
             }
             return account
   
@@ -115,14 +104,8 @@ class Account:
         """
 
         if local:
-            if type(public_key) != bytes:
-                public_key = binascii.unhexlify(public_key)
-                if not len(public_key) == PUBLICKEYSIZEINBYTES:
-                    raise ValueError('public key must be 32 chars')
-            padded = b'000' + public_key
-            address = crypto.b32qlc_encode(padded)[4:]
-            checksum = crypto.b32qlc_encode(crypto.address_checksum(public_key))
-            return ADDRESSPREFIX + address.decode('ascii') + checksum.decode('ascii')
+            address = public_key_to_address(public_key)
+            return address 
         else:
             return client.Client(self.URI).post("account_forPublicKey", [public_key])
         
@@ -138,23 +121,8 @@ class Account:
             if local is set to `True`, address will be converted localy
         """
         if local:
-            address = bytearray(address, 'ascii')
-
-            if not address.startswith(b"qlc_"):
-                raise ValueError(f'address does not start with qlc_: {address}')
-
-            if len(address) != HEXADDRESSLENGHT:
-                raise ValueError(f"address must be 64 chars long: {address}")
-
-            address = bytes(address)
-            key_b32qlc = b'1111' + address[4:56]
-            key_bytes = crypto.b32qlc_decode(key_b32qlc)[3:]
-            checksum = address[56:]
-
-            if crypto.b32qlc_encode(crypto.address_checksum(key_bytes)) != checksum:
-                raise ValueError(f"invalid address, invalid checksum: {address}")
-
-            return binascii.hexlify(key_bytes)
+            pk = address_to_public_key(address)
+            return pk
         else:
             pk = client.Client(self.URI).post("account_publicKey", [address])
             return pk.encode()
@@ -171,10 +139,6 @@ class Account:
             if local is set to `True`, address will be checked localy
         """
         if local:
-            try:
-                self.publicKey(address, local = True)
-                return True
-            except:
-                return False
+            return validate_qlc_address(address)
         else:
             return client.Client(self.URI).post("account_validate", [address])
