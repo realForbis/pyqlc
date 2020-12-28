@@ -132,6 +132,7 @@ def verify_signature(message, signature, public_key):
     :rtype: bool
     """
     validate_public_key(public_key)
+    validate_signature(signature)
 
     vk = VerifyingKey(unhexlify(public_key))
     try:
@@ -154,12 +155,14 @@ def sign(message, private_key):
     :return: the signature of the signed message
     :rtype: bytes
     """
+    private_key  = get_secret_key_from_privKey(private_key)
     validate_private_key(private_key)
 
     sk = SigningKey(unhexlify(private_key))
     sig = sk.sign(msg=unhexlify(message))
     signature = hexlify(sig).decode()
 
+    validate_signature(signature)
     return signature
 
 def validate_private_key(private_key):
@@ -213,4 +216,13 @@ def validate_qlc_address(QLC_address : str):
         return True
     except :
         return False
-    
+
+def validate_signature(signature : str):
+    if not len(signature) == 128 or not is_hex(signature):
+        raise InvalidSignature("Signature has to be a 128-character hexadecimal string")
+    return signature
+
+def get_secret_key_from_privKey(private_key):
+    sk = private_key[:64]
+    validate_private_key(sk)
+    return sk
