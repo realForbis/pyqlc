@@ -1,8 +1,10 @@
 from ed25519_blake2b import BadSignatureError
 
 __all__ = (
-    "InvalidPrivateKey", "InvalidSeed", "InvalidAccount", "InvalidAccount", 
-    "BadSignatureError", "InvalidQLCAddress", "InvalidSignature"
+    "InvalidPrivateKey", "InvalidSeed", "InvalidAccount", "InvalidPublicKey",
+    "BadSignatureError", "InvalidQLCAddress", "InvalidSignature", "InvalidBlock",
+    "InvalidWork", "InvalidDifficulty", "InvalidMultiplier", "InvalidBlockHash",
+    "InvalidBalance"
 )
 
 class InvalidPrivateKey(ValueError):
@@ -23,29 +25,20 @@ class InvalidPublicKey(ValueError):
 class InvalidSignature(BadSignatureError):
     """The given signature is invalid."""
 
+class InvalidBlock(ValueError):
+    """The block is invalid."""
 
-#class InvalidBlock(ValueError):
-#    """The block is invalid."""
-#
-#
-#class InvalidWork(ValueError):
-#    """The given work is invalid."""
-#
-#
-#class InvalidDifficulty(ValueError):
-#    """The given work difficulty is invalid."""
-#
-#
-#class InvalidMultiplier(ValueError):
-#    """The given work multiplier is invalid."""
-#
+class InvalidWork(ValueError):
+    """The given work is invalid."""
 
-#
-#class InvalidBlockHash(ValueError):
-#    """The given block hash is invalid."""
-#
-#
-#class InvalidBalance(ValueError):
-#    """The given balance is invalid."""
-#
-#
+class InvalidDifficulty(ValueError):
+    """The given work difficulty is invalid."""
+
+class InvalidMultiplier(ValueError):
+    """The given work multiplier is invalid."""
+
+class InvalidBlockHash(ValueError):
+    """The given block hash is invalid."""
+
+class InvalidBalance(ValueError):
+    """The given balance is invalid."""
