@@ -39,6 +39,57 @@ Output:
 """
 ```
 
+### Sending transaction
+```python
+from pyqlc.client import Client
+import json
+
+def main():
+    qlc = Client("https://rpc.qlcchain.online/")
+
+    Alice = {
+        "address" : "qlc_3xc5fbrqck6mrxrrx7hjnqf6jgyqsnkeg39k5mjw44m8aj3f1zdfh7cw8kzz",
+        "private_key" : "8e6bc788bbeae46f26315dd91bbbc6891278bf3bfb228aa901b39f3f1c169efbf5436a71754893c7718e95f1a5da48bbd7cd24c704f21ce3c10a664332d07d6d"
+    }
+
+    seed = qlc.Account.newSeed(local= True)
+    new_account = qlc.Account.create(seed= seed, index= 0, local= True)
+    Bob = {
+        "address" : new_account["address"]
+    }
+
+    send_block = qlc.Ledger.generateSendBlock(From= Alice["address"], to= Bob["address"], tokenName= "QGAS", amount=1, privKey= Alice["private_key"])
+    print(f"block = {json.dumps(send_block, indent= 4)}")
+
+    _hash = qlc.Ledger.process(**send_block)
+    print(f"hash = {_hash}")
+
+main()
+"""
+Output:
+
+block = {
+    "type": "Send",
+    "token": "ea842234e4dc5b17c33b35f99b5b86111a3af0bd8e4a8822602b866711de6d81",
+    "address": "qlc_3xc5fbrqck6mrxrrx7hjnqf6jgyqsnkeg39k5mjw44m8aj3f1zdfh7cw8kfz",
+    "balance": "346854",
+    "vote": "0",
+    "network": "0",
+    "storage": "0",
+    "oracle": "0",
+    "previous": "738642163581ddab31e171813abd1301bb7d14c7f470ca91f65717710c45a464",
+    "link": "42d2f239db3798b1f60b182e72790e71fe805e0eb62eef7a2e06646d71cfc695",
+    "message": "0000000000000000000000000000000000000000000000000000000000000000",
+    "povHeight": 514397,
+    "timestamp": 1613280327,
+    "extra": "0000000000000000000000000000000000000000000000000000000000000000",
+    "representative": "qlc_1111111111111111111111111111111111111111111111111111hifc8npp",
+    "work": "0000000000a70611",
+    "signature": "f01b8100ab050bd8efed9585f88ae4777c86fd050053b43a3bca2ec5e04c5cefdc12b108eaec792bb70ebe546a7dbdf6f63ca34a4eb6cf95b93259cae6cc970b"
+}
+hash = 6014521eb956b589013540174951ba690cde4f2d98b0fbc291f0f94ac1bbbb87
+"""
+```
 ## Requirements
 ```shell
 $ pip3 install -r requirements.txt
