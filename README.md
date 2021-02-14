@@ -94,3 +94,8 @@ hash = 6014521eb956b589013540174951ba690cde4f2d98b0fbc291f0f94ac1bbbb87
 ```shell
 $ pip3 install -r requirements.txt
 ```
+
+## Run Setup
+```shell
+$ python setup.py install
+```
