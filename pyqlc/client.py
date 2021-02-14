@@ -2,7 +2,7 @@ import requests
 from random import randint
 from . import (
     account,
-#    ledger,
+    ledger,
     contract,
     mintage,
     rewards,
@@ -27,7 +27,7 @@ class Client:
         self.URI = URI 
         self.WS = WS
         self.Account = account.Account(URI)
-#        self.Ledger = ledger.Ledger(URI)
+        self.Ledger = ledger.Ledger(URI)
         self.Contract = contract.Contract(URI)
         self.Mintage = mintage.Mintage(URI)
         self.Rewards = rewards.Rewards(URI)
