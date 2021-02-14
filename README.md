@@ -1,5 +1,8 @@
 # qlc-python-SDK
-
+## Instalation
+```shell
+$ python -m pip install pyqlc
+```
 ## Examples
 
 ### Create 3 random accounts
