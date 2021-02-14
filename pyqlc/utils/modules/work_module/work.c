@@ -73,7 +73,7 @@ static PyMethodDef work_methods[] = {
 };
 
 PyDoc_STRVAR(module_doc,
-"Function for calculating proof-of-work");
+"Function for calculating NANO proof-of-work");
 
 static struct PyModuleDef
 work_module = {
