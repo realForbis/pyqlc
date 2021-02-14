@@ -224,5 +224,5 @@ def validate_signature(signature : str):
 
 def get_secret_key_from_privKey(private_key):
     sk = private_key[:64]
-    validate_private_key(sk)
+    sk = validate_private_key(sk)
     return sk
