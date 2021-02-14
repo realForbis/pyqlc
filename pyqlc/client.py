@@ -8,7 +8,7 @@ from . import (
     rewards,
     net,
     pov,
-    pledge,
+#    pledge,
     destroy,
     miner,
     representation,
@@ -33,7 +33,7 @@ class Client:
         self.Rewards = rewards.Rewards(URI)
         self.Net = net.Net(URI)
         self.Pov = pov.Pov(URI)
-        self.Pledge = pledge.Pledge(URI)
+#        self.Pledge = pledge.Pledge(URI)
         self.Destroy = destroy.Destroy(URI)
         self.Miner = miner.Miner(URI)
         self.Representation = representation.Representation(URI)
