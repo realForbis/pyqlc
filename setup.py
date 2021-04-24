@@ -1,3 +1,5 @@
+import setuptools
+from setuptools.command.test import test as TestCommand
 import glob
 import io
 import os
@@ -6,8 +8,6 @@ import sys
 from distutils.ccompiler import get_default_compiler
 from shutil import rmtree
 
-import setuptools
-from setuptools.command.test import test as TestCommand
 
 NAME= "pyqlc"
 VERSION= "0.0.4"
